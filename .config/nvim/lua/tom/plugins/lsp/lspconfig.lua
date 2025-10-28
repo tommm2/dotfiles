@@ -9,7 +9,12 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		local keymap = vim.keymap
 
-		local function on_attach(_, bufnr)
+		local function on_attach(client, bufnr)
+			-- remove highlight when cursor on variable
+			if client.server_capabilities.documentHighlightProvider then
+				client.server_capabilities.documentHighlightProvider = false
+			end
+
 			local opts = { buffer = bufnr, silent = true, noremap = true }
 			keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 			keymap.set("n", "gh", vim.lsp.buf.hover, opts)

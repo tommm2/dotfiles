@@ -16,11 +16,15 @@ return {
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
+			-- cmdline = {
+			-- 	keymap = { preset = "inherit" },
+			-- 	completion = { menu = { auto_show = true } },
+			-- },
 			keymap = {
 				preset = "default",
 				["<C-j>"] = { "select_next", "fallback" },
 				["<C-k>"] = { "select_prev", "fallback" },
-				["<CR>"] = { "accept" },
+				["<CR>"] = { "accept", "fallback" },
 				["<C-u>"] = { "scroll_documentation_up", "fallback" },
 				["<C-d>"] = { "scroll_documentation_down", "fallback" },
 			},
@@ -38,7 +42,7 @@ return {
 					border = "single",
 					draw = {
 						columns = {
-							{ "kind_icon", "label", "label_description", gap = 1 },
+							{ "kind_icon", "label", "source_name", gap = 1 },
 						},
 						components = {
 							label_description = {

@@ -34,9 +34,7 @@ config.font_size = 16
 config.initial_cols = 150
 config.initial_rows = 50
 config.window_decorations = "RESIZE"
--- config.window_background_image = "/Users/jinzhengrong/Downloads/wallpaper.jpeg"
--- config.text_background_opacity = 0.7
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 80
 
 config.keys = {
@@ -48,35 +46,6 @@ config.keys = {
 	{ key = "v", mods = "ALT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "d", mods = "ALT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
 }
-
-config.colors = {
-	foreground = "#C0CAF5",
-	background = "#1A1B26",
-	cursor_bg = "#C0CAF5",
-	cursor_border = "#C0CAF5",
-	cursor_fg = "#1A1B26",
-	selection_bg = "#33467C",
-	selection_fg = "#C0CAF5",
-	ansi = {
-		"#1D202F",
-		"#F7768E",
-		"#9ECE6A",
-		"#E0AF68",
-		"#7AA2F7",
-		"#BB9AF7",
-		"#7DCFFF",
-		"#A9B1D6",
-	},
-	brights = {
-		"#414868",
-		"#F7768E",
-		"#9ECE6A",
-		"#E0AF68",
-		"#7AA2F7",
-		"#BB9AF7",
-		"#7DCFFF",
-		"#C0CAF5",
-	},
-}
+config.color_scheme = "Catppuccin Mocha"
 
 return config

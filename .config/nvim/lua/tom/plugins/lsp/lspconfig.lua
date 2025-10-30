@@ -3,10 +3,9 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		local keymap = vim.keymap
 
 		local function on_attach(client, bufnr)
@@ -25,43 +24,19 @@ return {
 		end
 
 		local servers = {
-			ts_ls = { cmd = { "typescript-language-server", "--stdio" } },
-			cssls = { cmd = { "vscode-css-language-server", "--stdio" } },
-			pyright = { cmd = { "pyright-langserver", "--stdio" } },
-			gopls = { cmd = { "gopls" } },
-			ruff = { cmd = { "ruff", "server" } },
-			eslint = { cmd = { "vscode-eslint-language-server", "--stdio" } },
-			marksman = { cmd = { "marksman", "server" } },
-			sqls = { cmd = { "sqls" } },
-			yamlls = { cmd = { "yaml-language-server", "--stdio" } },
-			jsonls = { cmd = { "vscode-json-language-server", "--stdio" } },
-			lua_ls = {
-				cmd = { "lua-language-server" },
-				settings = {
-					Lua = {
-						diagnostics = { globals = { "vim" } },
-						completion = { callSnippet = "Replace" },
-						workspace = {
-							checkThirdParty = false,
-							library = {
-								vim.env.VIMRUNTIME,
-								"${3rd}/luv/library",
-							},
-						},
-					},
-				},
-			},
-			dockerls = {
-				cmd = { "docker-langserver", "--stdio" },
-				filetypes = { "dockerfile" },
-			},
-			docker_compose_language_service = {
-				cmd = { "docker-compose-langserver", "--stdio" },
-				filetypes = { "yaml", "yml" },
-				root_dir = function(fname)
-					return vim.fs.root(fname, { "docker-compose.yml", "docker-compose.yaml", ".git" })
-				end,
-			},
+			ts_ls = {},
+			cssls = {},
+			pyright = {},
+			gopls = {},
+			ruff = {},
+			eslint = {},
+			marksman = {},
+			sqls = {},
+			yamlls = {},
+			jsonls = {},
+			lua_ls = {},
+			dockerls = {},
+			docker_compose_language_service = {},
 		}
 
 		for name, conf in pairs(servers) do

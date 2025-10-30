@@ -42,7 +42,7 @@ return {
 					border = "single",
 					draw = {
 						columns = {
-							{ "kind_icon", "label", "source_name", gap = 1 },
+							{ "kind_icon", "label", "label_description", "kind", gap = 1 },
 						},
 						components = {
 							label_description = {

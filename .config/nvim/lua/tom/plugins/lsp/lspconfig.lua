@@ -1,30 +1,16 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"saghen/blink.cmp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
-	config = function()
-		local capabilities = require("blink.cmp").get_lsp_capabilities()
-		local keymap = vim.keymap
-
-		local function on_attach(client, bufnr)
-			-- remove highlight when cursor on variable
-			if client.server_capabilities.documentHighlightProvider then
-				client.server_capabilities.documentHighlightProvider = false
-			end
-
-			local opts = { buffer = bufnr, silent = true, noremap = true }
-			keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-			keymap.set("n", "gh", vim.lsp.buf.hover, opts)
-			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-			keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-			keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-		end
-
-		local servers = {
-			ts_ls = {},
+	opts = {
+		servers = {
+			ts_ls = {
+				settings = {
+					inlayHints = { includeInlayParameterNameHints = "all" },
+				},
+			},
 			cssls = {},
 			pyright = {},
 			gopls = {},
@@ -37,17 +23,33 @@ return {
 			lua_ls = {},
 			dockerls = {},
 			docker_compose_language_service = {},
-		}
+		},
+	},
+	config = function(_, opts)
+		local keymap = vim.keymap
 
-		for name, conf in pairs(servers) do
-			conf.capabilities = capabilities
-			conf.on_attach = on_attach
-			vim.lsp.config[name] = conf
-			vim.lsp.enable(name)
+		local function on_attach(client, bufnr)
+			if client.server_capabilities.documentHighlightProvider then
+				client.server_capabilities.documentHighlightProvider = false
+			end
+
+			local km_opts = { buffer = bufnr, silent = true, noremap = true }
+			keymap.set("n", "gd", vim.lsp.buf.definition, km_opts)
+			keymap.set("n", "gh", vim.lsp.buf.hover, km_opts)
+			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, km_opts)
+			keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, km_opts)
+			keymap.set("n", "[d", vim.diagnostic.goto_prev, km_opts)
+			keymap.set("n", "]d", vim.diagnostic.goto_next, km_opts)
+		end
+
+		for server, config in pairs(opts.servers) do
+			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+			config.on_attach = on_attach
+			vim.lsp.config[server] = config
+			vim.lsp.enable(server)
 		end
 
 		local signs = { Error = "", Warn = "", Hint = "󰌶", Info = "" }
-
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })

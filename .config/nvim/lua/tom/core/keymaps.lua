@@ -27,6 +27,12 @@ map("n", "<leader>tt", "<cmd>ToggleTerm direction=float<cr>", opt("Toggle float 
 map("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", opt("Toggle vertical terminal"))
 map("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", opt("Toggle horizontal terminal"))
 
+-- buffer
+map("n", "<S-l>", ":bnext<CR>", opt("Next buffer"))
+map("n", "<S-h>", ":bprevious<CR>", opt("Previous buffer"))
+map("n", "<leader>bd", ":bdelete<CR>", opt("Delete buffer"))
+map("n", "<leader>bD", ":bufdo bd<CR>", opt("Delete all buffers"))
+
 -- quickfix
 map("n", "<leader>ql", function()
 	vim.diagnostic.setqflist({ open = true })

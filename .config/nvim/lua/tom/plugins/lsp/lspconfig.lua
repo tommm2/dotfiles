@@ -28,6 +28,7 @@ return {
 	config = function(_, opts)
 		local keymap = vim.keymap
 
+		-- keymap
 		local function on_attach(client, bufnr)
 			if client.server_capabilities.documentHighlightProvider then
 				client.server_capabilities.documentHighlightProvider = false
@@ -42,6 +43,7 @@ return {
 			keymap.set("n", "]d", vim.diagnostic.goto_next, km_opts)
 		end
 
+		-- server enable
 		for server, config in pairs(opts.servers) do
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 			config.on_attach = on_attach
@@ -49,11 +51,27 @@ return {
 			vim.lsp.enable(server)
 		end
 
-		local signs = { Error = "", Warn = "", Hint = "󰌶", Info = "" }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		-- diagnostic styling
+		local signs = {
+			{ name = "DiagnosticSignError", text = "", linehl = "DiagnosticLineError" },
+			{ name = "DiagnosticSignWarn", text = "", linehl = "DiagnosticLineWarn" },
+			{ name = "DiagnosticSignInfo", text = "", linehl = "DiagnosticLineInfo" },
+			{ name = "DiagnosticSignHint", text = "󰌶", linehl = "DiagnosticLineHint" },
+		}
+
+		for _, sign in ipairs(signs) do
+			vim.fn.sign_define(sign.name, {
+				text = sign.text,
+				texthl = sign.name,
+				numhl = "",
+				linehl = sign.linehl,
+			})
 		end
+
+		vim.api.nvim_set_hl(0, "DiagnosticLineError", { bg = "#2a2028" })
+		vim.api.nvim_set_hl(0, "DiagnosticLineWarn", { bg = "#2a2620" })
+		vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#f38ba8" })
+		vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#f9e2af" })
 
 		vim.diagnostic.config({
 			virtual_text = true,

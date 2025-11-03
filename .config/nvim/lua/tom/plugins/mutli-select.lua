@@ -1,4 +1,4 @@
 return {
-	"mg979/vim-visual-multi",
-	event = "VeryLazy",
+	"terryma/vim-multiple-cursors",
+	event = { "BufReadPost", "BufNewFile" },
 }

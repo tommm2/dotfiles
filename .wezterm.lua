@@ -29,7 +29,7 @@ wezterm.on("update-status", function(window, _)
 	end
 end)
 
-config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.font = wezterm.font("Maple Mono NF", { weight = "Medium" })
 config.font_size = 16
 config.initial_cols = 150
 config.initial_rows = 50

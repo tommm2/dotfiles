@@ -12,7 +12,6 @@ return {
 		vim.keymap.set("n", "<leader>h", function()
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end)
-		-- 快速跳轉
 		vim.keymap.set("n", "<leader>1", function()
 			harpoon:list():select(1)
 		end)

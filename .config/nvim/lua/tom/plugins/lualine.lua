@@ -23,7 +23,7 @@ return {
 							end
 						end,
 						symbols = {
-							modified = " ●", -- 只有未儲存才會出現
+							modified = " ●",
 							readonly = "",
 							unnamed = "[No Name]",
 						},

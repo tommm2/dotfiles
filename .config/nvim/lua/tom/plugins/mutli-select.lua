@@ -1,4 +1,4 @@
 return {
-	"terryma/vim-multiple-cursors",
-	event = { "BufReadPost", "BufNewFile" },
+	-- "terryma/vim-multiple-cursors",
+	-- event = { "BufReadPost", "BufNewFile" },
 }

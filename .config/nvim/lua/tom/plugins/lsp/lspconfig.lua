@@ -36,7 +36,16 @@ return {
 
 			local km_opts = { buffer = bufnr, silent = true, noremap = true }
 			keymap.set("n", "gd", vim.lsp.buf.definition, km_opts)
-			keymap.set("n", "gh", vim.lsp.buf.hover, km_opts)
+			keymap.set("n", "gh", function()
+				vim.lsp.buf.hover({
+					border = "rounded",
+				})
+			end, km_opts)
+			keymap.set("n", "gl", function()
+				vim.diagnostic.open_float(nil, {
+					border = "rounded",
+				})
+			end, km_opts)
 			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, km_opts)
 			keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, km_opts)
 			keymap.set("n", "[d", vim.diagnostic.goto_prev, km_opts)

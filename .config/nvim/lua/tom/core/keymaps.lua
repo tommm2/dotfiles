@@ -21,6 +21,9 @@ map("n", "<leader>sh", ":split<CR>", opt("Horizontal split"))
 map("n", "<leader>se", ":<C-W>=", opt("Equal window size"))
 map("n", "<leader>sx", ":close<CR>", opt("Close current window"))
 
+map("n", "<C-d>", "<C-d>zz", opt("Page down"))
+map("n", "<C-u>", "<C-u>zz", opt("Page up"))
+
 -- terminal
 map("t", "<esc>", [[<C-\><C-n>]])
 map("n", "<leader>tt", "<cmd>ToggleTerm direction=float<cr>", opt("Toggle float terminal"))

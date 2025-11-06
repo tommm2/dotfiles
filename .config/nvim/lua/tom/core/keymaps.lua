@@ -9,11 +9,13 @@ end
 
 map("n", "<leader>+", "<C-a>", opt("Increment number"))
 map("n", "<leader>-", "<C-x>", opt("Decrement number"))
--- map("n", "<leader>w", ":w<CR>", opt("Save file"))
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+map("n", "<leader>w", ":w<CR>", opt("Save file"))
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 map("n", "<C-a>", "ggVG", opt("Select all"))
+
+-- map("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- window management
 map("n", "<leader>sv", ":vsplit<CR>", opt("Vertical split"))
@@ -26,7 +28,6 @@ map("n", "<C-u>", "<C-u>zz", opt("Page up"))
 
 -- terminal
 map("t", "<esc>", [[<C-\><C-n>]])
-map("n", "<leader>tt", "<cmd>ToggleTerm direction=float<cr>", opt("Toggle float terminal"))
 map("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", opt("Toggle vertical terminal"))
 map("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", opt("Toggle horizontal terminal"))
 

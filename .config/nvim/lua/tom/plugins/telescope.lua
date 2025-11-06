@@ -43,20 +43,20 @@ return {
 				},
 				layout_config = {
 					horizontal = {
-						preview_width = 0.6, -- 預覽佔寬度比例
+						preview_width = 0.6,
 					},
 					vertical = {
-						preview_height = 0.6, -- 預覽佔高度比例
+						preview_height = 0.6,
 					},
 					flex = {
-						flip_columns = 120, -- 當寬度 < 120 時改用 vertical
+						flip_columns = 120,
 					},
 				},
 				path_display = { "smart" },
 				mappings = {
 					i = {
-						["<C-k>"] = actions.move_selection_previous, -- move to prev result
-						["<C-j>"] = actions.move_selection_next, -- move to next result
+						["<C-k>"] = actions.move_selection_previous,
+						["<C-j>"] = actions.move_selection_next,
 						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					},
 				},
@@ -77,6 +77,13 @@ return {
 		keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
 		keymap.set("n", "<leader>fj", "<cmd>Telescope jumplist<cr>", { desc = "Find jumplist" })
-		keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Find jumplist" })
+		keymap.set("n", "<leader>fn", "<cmd>Telescope find_files cwd=~/Desktop/notes<cr>", { desc = "Find note" })
+		keymap.set(
+			"n",
+			"<leader>sn",
+			"<cmd>Telescope live_grep cwd=~/Desktop/notes<cr>",
+			{ desc = "Search note with text" }
+		)
+		keymap.set("n", "<leader>nn", ":e ~/notes/template.md<CR>", { desc = "New note" })
 	end,
 }

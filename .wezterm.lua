@@ -24,7 +24,7 @@ wezterm.on("update-status", function(window, _)
 		})
 	else
 		window:set_config_overrides({
-			window_padding = { left = 8, right = 8, top = 0, bottom = 0 },
+			window_padding = { left = 10, right = 10, top = 8, bottom = 8 },
 		})
 	end
 end)

@@ -42,11 +42,17 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Aliases
+# Common alias
 alias vi='nvim'
 alias c='clear'
 alias ll="eza -al --icons=always"
 alias ls="eza --icons=always"
+alias zshconf="vi ~/.zshrc"
+alias termconf="vi ~/.wezterm.lua"
+alias tmuxconf="vi ~/.config/.tmux.conf"
+alias vimconf = "v1 ~/dotfiles/.config/nvim/"
+
+# Git alias
 alias gco="git checkout"
 alias gcd="git checkout dev"
 alias gstl="git stash list"
@@ -57,12 +63,7 @@ alias gbd="git branch -D"
 alias gstp="git stash pop"
 alias gstd="git stash drop"
 
-alias termconf="vi ~/.wezterm.lua"
-alias tmuxconf="vi ~/.config/.tmux.conf"
-alias zshconf="vi ~/.zshrc"
-
-
-# tmux alias
+# Tmux alias
 alias tn='tmux new -s'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
@@ -80,3 +81,20 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
+
+
+aliaslist() {
+  local BLUE="\033[1;34m"
+  local GREEN="\033[1;32m"
+  local YELLOW="\033[1;33m"
+  local RESET="\033[0m"
+
+  echo "\n${BLUE}== Common Aliases ==${RESET}"
+  alias | grep -E "vi=|c=|ll=|ls=|zshconf|termconf|tmuxconf"
+
+  echo "\n${GREEN}== Git Aliases ==${RESET}"
+  alias | grep -E "^g(co|cd|st|cb|bd|stp|std)"
+
+  echo "\n${YELLOW}== Tmux Aliases ==${RESET}"
+  alias | grep -E "^t(n|ls|a|at|s|k|ks|d)"
+}

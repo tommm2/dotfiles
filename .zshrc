@@ -34,6 +34,7 @@ HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
+
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
@@ -50,7 +51,6 @@ alias ls="eza --icons=always"
 alias zshconf="vi ~/.zshrc"
 alias termconf="vi ~/.wezterm.lua"
 alias tmuxconf="vi ~/.config/.tmux.conf"
-alias vimconf = "v1 ~/dotfiles/.config/nvim/"
 
 # Git alias
 alias gco="git checkout"
@@ -74,6 +74,8 @@ alias tks='tmux kill-server'
 alias td='tmux detach'
 
 export STARSHIP_CONFIG=~/example/non/default/path/starship.toml
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$HOME/.local/bin:$PATH"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
@@ -81,20 +83,21 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
+eval "$(pyenv init -)"
 
 
-aliaslist() {
-  local BLUE="\033[1;34m"
-  local GREEN="\033[1;32m"
-  local YELLOW="\033[1;33m"
-  local RESET="\033[0m"
-
-  echo "\n${BLUE}== Common Aliases ==${RESET}"
-  alias | grep -E "vi=|c=|ll=|ls=|zshconf|termconf|tmuxconf"
-
-  echo "\n${GREEN}== Git Aliases ==${RESET}"
-  alias | grep -E "^g(co|cd|st|cb|bd|stp|std)"
-
-  echo "\n${YELLOW}== Tmux Aliases ==${RESET}"
-  alias | grep -E "^t(n|ls|a|at|s|k|ks|d)"
-}
+# aliaslist() {
+#   local BLUE="\033[1;34m"
+#   local GREEN="\033[1;32m"
+#   local YELLOW="\033[1;33m"
+#   local RESET="\033[0m"
+#
+#   echo "\n${BLUE}== Common Aliases ==${RESET}"
+#   alias | grep -E "vi=|c=|ll=|ls=|zshconf|termconf|tmuxconf"
+#
+#   echo "\n${GREEN}== Git Aliases ==${RESET}"
+#   alias | grep -E "^g(co|cd|st|cb|bd|stp|std)"
+#
+#   echo "\n${YELLOW}== Tmux Aliases ==${RESET}"
+#   alias | grep -E "^t(n|ls|a|at|s|k|ks|d)"
+# }

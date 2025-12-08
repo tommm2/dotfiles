@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+vim.o.swapfile = false
 opt.relativenumber = true
 opt.hidden = true
 opt.number = true

@@ -41,3 +41,6 @@ map("n", "<leader>bD", ":bufdo bd<CR>", opt("Delete all buffers"))
 map("n", "<leader>ql", function()
 	vim.diagnostic.setqflist({ open = true })
 end, opt("Open quickfix list"))
+
+-- git blame
+map("n", "<leader>gt", "<cmd>GitBlameToggle<cr>", opt("Toggle Git blame"))

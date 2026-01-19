@@ -12,7 +12,6 @@ return {
 				},
 			},
 			cssls = {},
-			pyright = {},
 			gopls = {},
 			ruff = {},
 			eslint = {},
@@ -56,7 +55,7 @@ return {
 		for server, config in pairs(opts.servers) do
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 			config.on_attach = on_attach
-			vim.lsp.config[server] = config
+			vim.lsp.config(server, config)
 			vim.lsp.enable(server)
 		end
 

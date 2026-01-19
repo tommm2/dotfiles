@@ -33,12 +33,11 @@ config.font = wezterm.font("Maple Mono NF", { weight = "Medium" })
 config.font_size = 16
 config.initial_cols = 150
 config.initial_rows = 50
-config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.8
+-- config.window_decorations = "RESIZE"
+-- config.window_background_opacity = 0.8
 config.macos_window_background_blur = 80
 
 config.keys = {
-	{ key = "h", mods = "ALT", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "l", mods = "ALT", action = wezterm.action.ActivateTabRelative(1) },
 	{ key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Next") },
 	{ key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Prev") },

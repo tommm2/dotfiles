@@ -11,7 +11,6 @@ return {
 	{
 		"saghen/blink.cmp",
 		dependencies = {
-			"rafamadriz/friendly-snippets",
 			"onsails/lspkind.nvim", -- 加這個即可
 		},
 		event = { "BufReadPre", "BufNewFile" },
@@ -57,7 +56,7 @@ return {
 					},
 				},
 				sources = {
-					default = { "lsp", "path", "snippets", "buffer" },
+					default = { "lsp", "path", "buffer" },
 					providers = {
 						lazydev = {
 							name = "LazyDev",

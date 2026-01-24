@@ -1,7 +1,14 @@
 return {
 	"norcalli/nvim-colorizer.lua",
-	event = { "BufReadPre", "BufNewFile" },
-	config = function()
-		require("colorizer").setup()
-	end,
+	ft = { "css", "scss", "html", "javascript", "typescript", "javascriptreact", "typescriptreact", "lua" },
+	opts = {
+		"css",
+		"scss",
+		"html",
+		"javascript",
+		"typescript",
+		"javascriptreact",
+		"typescriptreact",
+		lua = { names = false },
+	},
 }

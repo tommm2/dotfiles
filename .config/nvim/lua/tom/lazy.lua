@@ -13,10 +13,23 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "tom.plugins" }, { import = "tom.plugins.lsp" } }, {
   checker = {
-    enabled = true,
-    notify = false,
+    enabled = false, -- 手動用 :Lazy check 檢查更新
   },
   change_detection = {
-    notify = false,
+    enabled = false, -- 關閉配置變更自動檢測
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
   },
 })

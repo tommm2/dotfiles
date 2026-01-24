@@ -1,6 +1,14 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
+	cmd = "Telescope",
+	keys = {
+		{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+		{ "<leader>fc", "<cmd>Telescope grep_string<cr>", desc = "Find string under cursor" },
+		{ "<leader>fw", "<cmd>Telescope live_grep<cr>", desc = "Find string" },
+		{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
+		{ "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "Find jumplist" },
+	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

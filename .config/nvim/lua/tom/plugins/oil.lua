@@ -1,18 +1,5 @@
 return {
 	{
-		"benomahony/oil-git.nvim",
-		dependencies = { "stevearc/oil.nvim" },
-		opts = {
-			highlights = {
-				OilGitUntracked = { fg = "#8bc34b" },
-				OilGitAdded = { fg = "#81b98b" },
-				OilGitModified = { fg = "#ffca27" },
-				OilGitRenamed = { fg = "#81b98b" },
-				OilGitIgnored = { fg = "#69777a" },
-			},
-		},
-	},
-	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		lazy = false,
@@ -29,8 +16,14 @@ return {
 
 			require("oil").setup({
 				default_file_explorer = true,
+				skip_confirm_for_simple_edits = true,
 				view_options = {
 					show_hidden = true,
+					is_always_hidden = function(name)
+						-- 隱藏常見的大型/無用目錄
+						local hidden = { ".git", "node_modules", ".DS_Store", "__pycache__", ".venv" }
+						return vim.tbl_contains(hidden, name)
+					end,
 				},
 				win_options = {
 					winbar = "%!v:lua.get_oil_winbar()",
@@ -42,6 +35,11 @@ return {
 					list = false,
 					conceallevel = 3,
 					concealcursor = "nvic",
+				},
+				-- 性能優化
+				cleanup_delay_ms = 2000,
+				lsp_file_methods = {
+					autosave_changes = false,
 				},
 			})
 

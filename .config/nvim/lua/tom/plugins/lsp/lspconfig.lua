@@ -12,6 +12,7 @@ return {
 				},
 			},
 			cssls = {},
+			tailwindcss = {},
 			gopls = {},
 			ruff = {},
 			eslint = {},

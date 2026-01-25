@@ -9,8 +9,8 @@ window-width = 120
 window-height = 36
 
 # Background transparency and blur
-# background-opacity = 0.85
-# background-blur-radius = 20
+background-opacity = 0.85
+background-blur-radius = 20
 
 # Link detection
 link-url = true

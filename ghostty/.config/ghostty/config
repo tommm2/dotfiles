@@ -1,0 +1,23 @@
+# Theme
+theme = Catppuccin frappe
+
+# Font
+font-size = 16
+
+# Window size
+window-width = 120
+window-height = 36
+
+# Background transparency and blur
+background-opacity = 0.85
+background-blur-radius = 20
+
+# Link detection
+link-url = true
+
+# Curosr
+cursor-style = bar
+
+
+# Keybindingk
+keybind = super+r=reload_config

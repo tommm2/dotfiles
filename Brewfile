@@ -27,14 +27,8 @@ brew "git"
 # Official GitLab CI runner
 brew "gitlab-runner"
 # Render markdown on the CLI
-brew "glow"
-# Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Improved top (interactive process viewer)
-brew "htop"
-# Run and Test HTTP Requests with plain text and curl
-brew "hurl"
-# Simple terminal UI for git commands
 brew "lazygit"
 # Package manager for the Lua programming language
 brew "luarocks"
@@ -42,8 +36,6 @@ brew "luarocks"
 brew "neovim"
 # Manage multiple Node.js versions
 brew "nvm"
-# Theme for zsh
-brew "powerlevel10k"
 # Python version management
 brew "pyenv"
 # Extremely fast Python linter, written in Rust
@@ -56,8 +48,6 @@ brew "stow"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Feature-rich command-line audio/video downloader
-brew "yt-dlp"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # UNIX shell (command interpreter)
@@ -72,12 +62,9 @@ cask "font-maple-mono"
 cask "font-maple-mono-nf"
 cask "font-meslo-lg-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
-# Set of tools to manage resources and applications hosted on Google Cloud
-cask "gcloud-cli"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # AI-powered productivity tool for the command-line
-cask "kiro-cli"
 vscode "aaron-bond.better-comments"
 vscode "alefragnani.project-manager"
 vscode "amazonwebservices.codewhisperer-for-command-line-companion"

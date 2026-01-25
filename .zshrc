@@ -49,7 +49,7 @@ alias c='clear'
 alias ll="eza -al --icons=always"
 alias ls="eza --icons=always"
 alias zshconf="vi ~/.zshrc"
-alias termconf="vi ~/.wezterm.lua"
+alias wezconf="vi ~/.wezterm.lua"
 alias tmuxconf="vi ~/.config/.tmux.conf"
 
 # Git alias
@@ -85,19 +85,3 @@ eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 eval "$(pyenv init -)"
 
-
-# aliaslist() {
-#   local BLUE="\033[1;34m"
-#   local GREEN="\033[1;32m"
-#   local YELLOW="\033[1;33m"
-#   local RESET="\033[0m"
-#
-#   echo "\n${BLUE}== Common Aliases ==${RESET}"
-#   alias | grep -E "vi=|c=|ll=|ls=|zshconf|termconf|tmuxconf"
-#
-#   echo "\n${GREEN}== Git Aliases ==${RESET}"
-#   alias | grep -E "^g(co|cd|st|cb|bd|stp|std)"
-#
-#   echo "\n${YELLOW}== Tmux Aliases ==${RESET}"
-#   alias | grep -E "^t(n|ls|a|at|s|k|ks|d)"
-# }

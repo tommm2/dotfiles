@@ -1,5 +1,5 @@
 # Theme
-theme = Catppuccin frappe
+theme = Catppuccin Mocha
 
 # Font
 font-size = 16
@@ -9,7 +9,7 @@ window-width = 120
 window-height = 36
 
 # Background transparency and blur
-background-opacity = 0.85
+background-opacity = 0.85 
 background-blur-radius = 20
 
 # Link detection
@@ -19,6 +19,8 @@ link-url = true
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
+
+macos-option-as-alt = left
 
 
 # Keybindings

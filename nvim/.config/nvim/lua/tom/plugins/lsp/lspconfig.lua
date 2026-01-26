@@ -8,7 +8,8 @@ return {
 		servers = {
 			ts_ls = {
 				settings = {
-					inlayHints = { includeInlayParameterNameHints = "all" },
+					javascript = { inlayHints = { includeInlayParameterNameHints = "all" } },
+					typescript = { inlayHints = { includeInlayParameterNameHints = "all" } },
 				},
 			},
 			cssls = {},
@@ -20,74 +21,84 @@ return {
 			sqls = {},
 			yamlls = {},
 			jsonls = {},
-			lua_ls = {},
+			lua_ls = {
+				settings = {
+					Lua = {
+						diagnostics = { globals = { "vim" } },
+						workspace = { checkThirdParty = false },
+					},
+				},
+			},
 			dockerls = {},
 			docker_compose_language_service = {},
 		},
 	},
 	config = function(_, opts)
-		local keymap = vim.keymap
-
-		-- keymap
-		local function on_attach(client, bufnr)
-			if client.server_capabilities.documentHighlightProvider then
-				client.server_capabilities.documentHighlightProvider = false
-			end
-
-			local km_opts = { buffer = bufnr, silent = true, noremap = true }
-			keymap.set("n", "gd", vim.lsp.buf.definition, km_opts)
-			keymap.set("n", "gh", function()
-				vim.lsp.buf.hover({
-					border = "rounded",
-				})
-			end, km_opts)
-			keymap.set("n", "gl", function()
-				vim.diagnostic.open_float(nil, {
-					border = "rounded",
-				})
-			end, km_opts)
-			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, km_opts)
-			keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, km_opts)
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, km_opts)
-			keymap.set("n", "]d", vim.diagnostic.goto_next, km_opts)
-		end
-
-		-- server enable
-		for server, config in pairs(opts.servers) do
-			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-			config.on_attach = on_attach
-			vim.lsp.config(server, config)
-			vim.lsp.enable(server)
-		end
-
-		-- diagnostic styling
-		local signs = {
-			{ name = "DiagnosticSignError", text = "", linehl = "DiagnosticLineError" },
-			{ name = "DiagnosticSignWarn", text = "", linehl = "DiagnosticLineWarn" },
-			{ name = "DiagnosticSignInfo", text = "", linehl = "DiagnosticLineInfo" },
-			{ name = "DiagnosticSignHint", text = "󰌶", linehl = "DiagnosticLineHint" },
-		}
-
-		for _, sign in ipairs(signs) do
-			vim.fn.sign_define(sign.name, {
-				text = sign.text,
-				texthl = sign.name,
-				numhl = "",
-				linehl = sign.linehl,
-			})
-		end
-
-		vim.api.nvim_set_hl(0, "DiagnosticLineError", { bg = "#2a2028" })
-		vim.api.nvim_set_hl(0, "DiagnosticLineWarn", { bg = "#2a2620" })
-		vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#f38ba8" })
-		vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#f9e2af" })
-
+		local signs = { Error = "", Warn = "", Info = "", Hint = "󰌶" }
 		vim.diagnostic.config({
-			virtual_text = true,
-			signs = true,
+			virtual_text = { prefix = "●" },
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = signs.Error,
+					[vim.diagnostic.severity.WARN] = signs.Warn,
+					[vim.diagnostic.severity.INFO] = signs.Info,
+					[vim.diagnostic.severity.HINT] = signs.Hint,
+				},
+			},
 			underline = true,
 			update_in_insert = false,
 			severity_sort = true,
+			float = { border = "rounded" },
 		})
+
+		vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#f38ba8" })
+		vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#f9e2af" })
+
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				local bufnr = ev.buf
+				local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+				if client and client.server_capabilities.documentHighlightProvider then
+					client.server_capabilities.documentHighlightProvider = false
+				end
+
+				local function nmap(keys, func, desc)
+					vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, desc = "LSP: " .. desc })
+				end
+
+				nmap("gd", vim.lsp.buf.definition, "Go to Definition")
+				nmap("gh", function()
+					vim.lsp.buf.hover({ border = "rounded" })
+				end, "Hover Documentation")
+				nmap("gl", function()
+					vim.diagnostic.open_float({ border = "rounded" })
+				end, "Show Diagnostic")
+				nmap("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+				nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+				
+				-- 0.10+ 現代跳轉 API
+				nmap("[d", function()
+					vim.diagnostic.jump({ count = -1, float = true })
+				end, "Previous Diagnostic")
+				nmap("]d", function()
+					vim.diagnostic.jump({ count = 1, float = true })
+				end, "Next Diagnostic")
+
+				if client and client.server_capabilities.inlayHintProvider then
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+					nmap("<leader>th", function()
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
+					end, "Toggle Inlay Hints")
+				end
+			end,
+		})
+
+		for server, server_opts in pairs(opts.servers) do
+			server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
+			vim.lsp.config(server, server_opts)
+			vim.lsp.enable(server)
+		end
 	end,
 }

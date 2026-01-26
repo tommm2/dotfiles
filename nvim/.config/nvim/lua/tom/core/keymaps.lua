@@ -37,6 +37,12 @@ map("n", "<S-h>", ":bprevious<CR>", opt("Previous buffer"))
 map("n", "<leader>bd", ":bdelete<CR>", opt("Delete buffer"))
 map("n", "<leader>bD", ":bufdo bd<CR>", opt("Delete all buffers"))
 
+-- move line
+map("n", "<A-j>", ":m .+1<CR>==", opt("Move line down"))
+map("n", "<A-k>", ":m .-2<CR>==", opt("Move line up"))
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", opt("Move selection down"))
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", opt("Move selection up"))
+
 -- quickfix
 map("n", "<leader>ql", function()
 	vim.diagnostic.setqflist({ open = true })

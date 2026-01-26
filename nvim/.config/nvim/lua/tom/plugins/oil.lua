@@ -1,4 +1,25 @@
 return {
+	-- {
+	-- 	"benomahony/oil-git.nvim",
+	-- 	dependencies = { "stevearc/oil.nvim" },
+	-- 	opts = {
+	-- 		highlights = {
+	-- 			OilGitAdded = { fg = "#81b88b" },
+	-- 			OilGitModified = { fg = "#e2c08d" },
+	-- 			OilGitDeleted = { fg = "#c74e39" },
+	-- 			OilGitRenamed = { fg = "#73c991" },
+	-- 			OilGitUntracked = { fg = "#73c991" },
+	-- 			OilGitIgnored = { fg = "#8c8c8c" },
+	-- 		},
+	-- 	},
+	-- },
+	{
+		"refractalize/oil-git-status.nvim",
+		dependencies = {
+			"stevearc/oil.nvim",
+		},
+		config = true,
+	},
 	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -20,7 +41,6 @@ return {
 				view_options = {
 					show_hidden = true,
 					is_always_hidden = function(name)
-						-- 隱藏常見的大型/無用目錄
 						local hidden = { ".git", "node_modules", ".DS_Store", "__pycache__", ".venv" }
 						return vim.tbl_contains(hidden, name)
 					end,
@@ -28,7 +48,7 @@ return {
 				win_options = {
 					winbar = "%!v:lua.get_oil_winbar()",
 					wrap = false,
-					signcolumn = "no",
+					signcolumn = "yes",
 					cursorcolumn = false,
 					foldcolumn = "0",
 					spell = false,
@@ -36,7 +56,6 @@ return {
 					conceallevel = 3,
 					concealcursor = "nvic",
 				},
-				-- 性能優化
 				cleanup_delay_ms = 2000,
 				lsp_file_methods = {
 					autosave_changes = false,

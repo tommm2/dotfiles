@@ -15,8 +15,6 @@ map("v", ">", ">gv")
 
 map("n", "<C-a>", "ggVG", opt("Select all"))
 
--- map("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
 -- window management
 map("n", "<leader>sv", ":vsplit<CR>", opt("Vertical split"))
 map("n", "<leader>sh", ":split<CR>", opt("Horizontal split"))
@@ -48,5 +46,8 @@ map("n", "<leader>ql", function()
 	vim.diagnostic.setqflist({ open = true })
 end, opt("Open quickfix list"))
 
--- git blame
-map("n", "<leader>gt", "<cmd>GitBlameToggle<cr>", opt("Toggle Git blame"))
+-- Git
+map("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status" })
+map("n", "<leader>gc", ":Git commit<CR>", { desc = "Git Commit" })
+map("n", "<leader>gp", ":Git push<CR>", { desc = "Git Push" })
+map("n", "<leader>gl", ":Git pull --rebase<CR>", { desc = "Git Pull Rebase" })

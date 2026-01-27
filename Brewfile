@@ -26,10 +26,8 @@ brew "gemini-cli"
 brew "git"
 # Official GitLab CI runner
 brew "gitlab-runner"
-# Render markdown on the CLI
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Improved top (interactive process viewer)
-brew "lazygit"
 # Package manager for the Lua programming language
 brew "luarocks"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -62,9 +60,10 @@ cask "font-maple-mono"
 cask "font-maple-mono-nf"
 cask "font-meslo-lg-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
-# AI-powered productivity tool for the command-line
 vscode "aaron-bond.better-comments"
 vscode "alefragnani.project-manager"
 vscode "amazonwebservices.codewhisperer-for-command-line-companion"
@@ -78,6 +77,7 @@ vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "google.gemini-cli-vscode-ide-companion"
+vscode "google.geminicodeassist"
 vscode "mechatroner.rainbow-csv"
 vscode "mhutchie.git-graph"
 vscode "million.million-lint"

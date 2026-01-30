@@ -34,6 +34,15 @@ return {
 		},
 	},
 	config = function(_, opts)
+		-- Get base capabilities from blink.cmp
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+		-- Extend server options with capabilities
+		for _, server_opts in pairs(opts.servers) do
+			server_opts.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server_opts.capabilities or {})
+		end
+
+		-- Diagnostic signs and configuration
 		local signs = { Error = "", Warn = "", Info = "", Hint = "󰌶" }
 		vim.diagnostic.config({
 			virtual_text = { prefix = "●" },
@@ -54,12 +63,14 @@ return {
 		vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#f38ba8" })
 		vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#f9e2af" })
 
+		-- LSP Attach Autocommand for keymaps and settings
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
 				local bufnr = ev.buf
 				local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
+				-- Disable document highlighting to improve performance
 				if client and client.server_capabilities.documentHighlightProvider then
 					client.server_capabilities.documentHighlightProvider = false
 				end
@@ -77,8 +88,6 @@ return {
 				end, "Show Diagnostic")
 				nmap("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
 				nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-				
-				-- 0.10+ 現代跳轉 API
 				nmap("[d", function()
 					vim.diagnostic.jump({ count = -1, float = true })
 				end, "Previous Diagnostic")
@@ -87,18 +96,11 @@ return {
 				end, "Next Diagnostic")
 
 				if client and client.server_capabilities.inlayHintProvider then
-					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 					nmap("<leader>th", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
 					end, "Toggle Inlay Hints")
 				end
 			end,
 		})
-
-		for server, server_opts in pairs(opts.servers) do
-			server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
-			vim.lsp.config(server, server_opts)
-			vim.lsp.enable(server)
-		end
 	end,
 }

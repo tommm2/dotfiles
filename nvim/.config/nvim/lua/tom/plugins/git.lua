@@ -3,6 +3,7 @@ return {
 		"tpope/vim-fugitive",
 		event = "VeryLazy",
 	},
+  { "tpope/vim-unimpaired", event = "VeryLazy" },
 	{
 		"ThePrimeagen/git-worktree.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim" },

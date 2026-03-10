@@ -1,8 +1,9 @@
 # Theme
-theme = Catppuccin Mocha
+theme = dark:Rose Pine,light:Rose Pine Moon
 
 # Font
 font-size = 16
+font-family = MesloLGL Nerd Font Mono
 
 # Window size
 window-width = 120
@@ -12,6 +13,9 @@ window-height = 36
 background-opacity = 0.85 
 background-blur-radius = 20
 
+# adjust padding when adjust window size
+window-padding-balance = true
+
 # Link detection
 link-url = true
 
@@ -19,9 +23,8 @@ link-url = true
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
-
 macos-option-as-alt = left
-
 
 # Keybindings
 keybind = super+r=reload_config
+keybind = shift+enter=text:\n

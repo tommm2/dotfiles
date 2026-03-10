@@ -5,32 +5,53 @@ return {
 	config = function()
 		local lualine = require("lualine")
 
+		local colors = {
+			base = "#191724",
+			surface = "#1f1d2e",
+			overlay = "#26233a",
+			muted = "#6e6a86",
+			subtle = "#908caa",
+			text = "#e0def4",
+			love = "#eb6f92",
+			gold = "#f6c177",
+			rose = "#ebbcba",
+			pine = "#31748f",
+			foam = "#9ccfd8",
+			iris = "#c4a7e7",
+		}
+
 		lualine.setup({
 			options = {
-				-- section_separators = { left = "", right = "" },
+				theme = "rose-pine",
 				section_separators = { left = "", right = "" },
 				component_separators = "",
+				globalstatus = true,
+				disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
 			},
 			sections = {
+				lualine_a = { { "mode", separator = { left = "", right = "" }, right_padding = 2 } },
+				lualine_b = { "branch", "diff", "diagnostics" },
 				lualine_c = {
 					{
 						"filename",
-						-- separator = { right = "" },
-						separator = { right = "" },
+						separator = { right = "" },
 						color = function()
 							if vim.bo.modified then
-								return { fg = "#1e1e2e", bg = "#f9e2af", gui = "bold" }
+								return { fg = colors.base, bg = colors.gold, gui = "bold" }
 							else
-								return { fg = "#cdd6f4", bg = "#3c3e52" }
+								return { fg = colors.text, bg = colors.overlay }
 							end
 						end,
 						symbols = {
 							modified = " ●",
 							readonly = "",
 							unnamed = "[No Name]",
-						},
 					},
+          },
 				},
+				lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_y = {},
+				lualine_z = { { "location", separator = { left = "", right = "" }, left_padding = 2 } },
 			},
 		})
 	end,

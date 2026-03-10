@@ -1,7 +1,5 @@
 return {
-	"MeanderingProgrammer/render-markdown.nvim",
-	opts = {
-		file_types = { "markdown" },
-		heading = { border = true },
-	},
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    dependencies = { "saghen/blink.cmp" },
 }

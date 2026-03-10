@@ -10,51 +10,51 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
-		dependencies = {
-			"onsails/lspkind.nvim",
-		},
-		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
+		event = { "InsertEnter" },
 		opts = function()
-			local lspkind = require("lspkind")
-			lspkind.init({ preset = "codicons" })
-
 			return {
 				keymap = {
-					preset = "default",
+					preset = "none",
 					["<C-j>"] = { "select_next", "fallback" },
 					["<C-k>"] = { "select_prev", "fallback" },
-          ["<CR>"]  = { "accept", "fallback" },
+					["<CR>"] = { "accept", "fallback" },
+					["<Tab>"] = { "select_next", "fallback" },
+					["<S-Tab>"] = { "select_prev", "fallback" },
+					["<C-e>"] = { "hide", "fallback" },
 				},
-				appearance = { use_nvim_cmp_as_default = true, nerd_font_variant = "mono" },
+
+				appearance = {
+					use_nvim_cmp_as_default = true,
+					nerd_font_variant = "mono",
+				},
+
 				completion = {
-					documentation = { auto_show = true, window = { border = "rounded" } },
-					list = { selection = { preselect = true } },
+					list = {
+						selection = {
+							preselect = false,
+							auto_insert = false,
+						},
+					},
 					menu = {
 						border = "rounded",
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 						draw = {
 							columns = {
-								{ "kind_icon", "label", "label_description", "kind", gap = 1 },
-							},
-							components = {
-								kind_icon = {
-									text = function(ctx)
-										return lspkind.symbol_map[ctx.kind] or ""
-									end,
-									highlight = "CmpItemKind",
-								},
-								label_description = { width = { max = 50 } },
-								source_name = {
-									text = function(ctx)
-										return "[" .. ctx.source_name .. "]"
-									end,
-								},
+								{ "kind_icon", "label", gap = 1 },
+								{ "kind" },
 							},
 						},
 					},
+					documentation = {
+						auto_show = true,
+						window = { border = "rounded" },
+						update_delay_ms = 100,
+					},
 				},
+
 				sources = {
-					default = { "lsp", "path", "buffer" },
+					default = { "lsp", "lazydev", "path", "buffer" },
 					providers = {
 						lazydev = {
 							name = "LazyDev",
@@ -65,6 +65,5 @@ return {
 				},
 			}
 		end,
-		opts_extend = { "sources.default" },
 	},
 }

@@ -56,13 +56,16 @@ map("n", "<leader>gw", ":Telescope git_worktree git_worktrees<CR>", opt("Git Swi
 map("n", "<leader>gW", ":Telescope git_worktree create_git_worktree<CR>", opt("Git Create Worktree"))
 
 -- Note
+local note_dir = vim.fn.expand("$NOTE_DIR")
+local tools_dir = vim.fn.expand("$TOOLS_DIR")
+
 local function new_note(dir)
 	local ts = os.date("%Y%m%d%H%M%S")
-	vim.cmd("e /Users/jinzhengrong/Desktop/note/" .. dir .. "/new-" .. ts .. ".md")
+	vim.cmd("e " .. note_dir .. "/" .. dir .. "/new-" .. ts .. ".md")
 end
 
 map("n", "<leader>nf", function()
-	require("telescope.builtin").live_grep({ search_dirs = { "/Users/jinzhengrong/Desktop/note" } })
+	require("telescope.builtin").live_grep({ search_dirs = { note_dir } })
 end, opt("Search notes"))
 
 map("n", "<leader>nb", function() new_note("bugs") end, opt("New bug note"))
@@ -73,7 +76,7 @@ map("n", "<leader>nr", function()
 	local file = vim.fn.expand("%:p")
 	vim.cmd("w")
 
-	local new_path = vim.fn.system("/Users/jinzhengrong/Desktop/projects/tools/note-rename.sh " .. vim.fn.shellescape(file))
+	local new_path = vim.fn.system(tools_dir .. "/note-rename.sh " .. vim.fn.shellescape(file))
 	new_path = vim.fn.trim(new_path)
 
 	if new_path ~= "" and not new_path:find("Error") then
@@ -83,4 +86,4 @@ map("n", "<leader>nr", function()
 	else
 		print("Rename failed: " .. new_path)
 	end
-end, opt('AI generate filename'))
+end, opt("AI generate filename"))

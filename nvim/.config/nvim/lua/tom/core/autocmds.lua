@@ -11,7 +11,7 @@ for pattern, template in pairs(templates) do
 	vim.api.nvim_create_autocmd("BufNewFile", {
 		pattern = pattern,
 		callback = function()
-			vim.cmd("0r /Users/jinzhengrong/Desktop/note/templates/" .. template)
+			vim.cmd("0r " .. vim.fn.expand("$NOTE_DIR") .. "/templates/" .. template)
 			local date = os.date("%Y-%m-%d")
 			vim.cmd("silent! %s/^date:$/date: " .. date .. "/")
 		end,

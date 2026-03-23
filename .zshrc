@@ -94,7 +94,7 @@ alias nd='vi ~/Desktop/note/docs/untitled.md'
 
 export NOTE_DIR="$HOME/Desktop/note"
 export TOOLS_DIR="$HOME/Desktop/projects/tools"
-export STARSHIP_CONFIG=~/example/non/default/path/starship.toml
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$HOME/.local/bin:$PATH"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

@@ -87,6 +87,13 @@ alias tk='tmux kill-session -t'
 alias tks='tmux kill-server'
 alias td='tmux detach'
 
+# Note alias
+alias nb='vi ~/Desktop/note/bugs/untitled.md'
+alias ni='vi ~/Desktop/note/ideas/untitled.md'
+alias nd='vi ~/Desktop/note/docs/untitled.md'
+
+export NOTE_DIR="$HOME/Desktop/note"
+export TOOLS_DIR="$HOME/Desktop/projects/tools"
 export STARSHIP_CONFIG=~/example/non/default/path/starship.toml
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$HOME/.local/bin:$PATH"

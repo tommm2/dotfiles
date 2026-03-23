@@ -93,5 +93,25 @@ return {
 			{ desc = "Search note with text" }
 		)
 		keymap.set("n", "<leader>nn", ":e ~/notes/template.md<CR>", { desc = "New note" })
+		keymap.set("n", "<leader>fh", function()
+			require("telescope.builtin").find_files({
+				find_command = { "fd", "--hidden", "--no-ignore", "--glob", ".env*" },
+				prompt_title = "Find .env files",
+			})
+		end, { desc = "Find .env files" })
+		keymap.set("n", "<leader>fd", function()
+			require("telescope.builtin").find_files({
+				find_command = { "fd", "--type", "d", "--hidden", "--exclude", ".git" },
+				prompt_title = "Find Directory",
+				attach_mappings = function(_, map)
+					map("i", "<CR>", function(bufnr)
+						local selection = require("telescope.actions.state").get_selected_entry()
+						require("telescope.actions").close(bufnr)
+						require("oil").open(selection[1])
+					end)
+					return true
+				end,
+			})
+		end, { desc = "Find directory (open in Oil)" })
 	end,
 }

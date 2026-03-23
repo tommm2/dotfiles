@@ -56,7 +56,11 @@ return {
 					conceallevel = 3,
 					concealcursor = "nvic",
 				},
-				cleanup_delay_ms = 2000,
+				keymaps = {
+				["<C-h>"] = false,
+				["<C-l>"] = false,
+			},
+			cleanup_delay_ms = 2000,
 				lsp_file_methods = {
 					autosave_changes = false,
 				},

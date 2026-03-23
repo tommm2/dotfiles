@@ -54,3 +54,33 @@ map("n", "<leader>gb", ":Git blame<CR>", opt("Git Blame"))
 map("n", "<leader>gh", ":0Gclog<CR>", opt("Git file History"))
 map("n", "<leader>gw", ":Telescope git_worktree git_worktrees<CR>", opt("Git Switch Worktree"))
 map("n", "<leader>gW", ":Telescope git_worktree create_git_worktree<CR>", opt("Git Create Worktree"))
+
+-- Note
+local function new_note(dir)
+	local ts = os.date("%Y%m%d%H%M%S")
+	vim.cmd("e /Users/jinzhengrong/Desktop/note/" .. dir .. "/new-" .. ts .. ".md")
+end
+
+map("n", "<leader>nf", function()
+	require("telescope.builtin").live_grep({ search_dirs = { "/Users/jinzhengrong/Desktop/note" } })
+end, opt("Search notes"))
+
+map("n", "<leader>nb", function() new_note("bugs") end, opt("New bug note"))
+map("n", "<leader>ni", function() new_note("ideas") end, opt("New idea note"))
+map("n", "<leader>nd", function() new_note("docs") end, opt("New doc note"))
+
+map("n", "<leader>nr", function()
+	local file = vim.fn.expand("%:p")
+	vim.cmd("w")
+
+	local new_path = vim.fn.system("/Users/jinzhengrong/Desktop/projects/tools/note-rename.sh " .. vim.fn.shellescape(file))
+	new_path = vim.fn.trim(new_path)
+
+	if new_path ~= "" and not new_path:find("Error") then
+		vim.cmd("e " .. new_path)
+		vim.cmd("bd #")
+		print("Renamed: " .. vim.fn.fnamemodify(new_path, ":t"))
+	else
+		print("Rename failed: " .. new_path)
+	end
+end, opt('AI generate filename'))

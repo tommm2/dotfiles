@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/Users/jinzhengrong/.zsh/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
  
@@ -49,8 +56,8 @@ alias c='clear'
 alias ll="eza -al --icons=always"
 alias ls="eza --icons=always"
 alias zshconf="vi ~/.zshrc"
-alias wezconf="vi ~/.wezterm.lua"
-alias tmuxconf="vi ~/.config/.tmux.conf"
+alias termconf="vi ~/dotfiles/ghostty/.config/ghostty/config"
+alias tmuxconf="vi ~/dotfiles/.tmux.conf"
 
 # Git alias
 alias gco="git checkout"
@@ -62,6 +69,13 @@ alias gcb="git checkout -b"
 alias gbd="git branch -D"
 alias gstp="git stash pop"
 alias gstd="git stash drop"
+
+alias gwa='git worktree add'
+alias gwl='git worktree list'
+alias gwr='git worktree remove'
+alias gwp='git worktree prune'
+# 進階用法：建立新分支並新增工作區 (用法: gwnb <路徑> <新分支名>)
+alias gwnb='git worktree add -b'
 
 # Tmux alias
 alias tn='tmux new -s'
@@ -85,3 +99,4 @@ eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 eval "$(pyenv init -)"
 
+export PATH="$HOME/bin:$PATH"

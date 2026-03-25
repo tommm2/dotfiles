@@ -56,21 +56,7 @@ map("n", "<leader>gw", ":Telescope git_worktree git_worktrees<CR>", opt("Git Swi
 map("n", "<leader>gW", ":Telescope git_worktree create_git_worktree<CR>", opt("Git Create Worktree"))
 
 -- Note
-local note_dir = vim.fn.expand("$NOTE_DIR")
 local tools_dir = vim.fn.expand("$TOOLS_DIR")
-
-local function new_note(dir)
-	local ts = os.date("%Y%m%d%H%M%S")
-	vim.cmd("e " .. note_dir .. "/" .. dir .. "/new-" .. ts .. ".md")
-end
-
-map("n", "<leader>nf", function()
-	require("telescope.builtin").live_grep({ search_dirs = { note_dir } })
-end, opt("Search notes"))
-
-map("n", "<leader>nb", function() new_note("bugs") end, opt("New bug note"))
-map("n", "<leader>ni", function() new_note("ideas") end, opt("New idea note"))
-map("n", "<leader>nd", function() new_note("docs") end, opt("New doc note"))
 
 map("n", "<leader>nr", function()
 	local file = vim.fn.expand("%:p")

@@ -23,7 +23,11 @@ return {
 	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		lazy = false,
+		keys = {
+			{ "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
+			{ "<leader>e", "<cmd>Oil<CR>", desc = "Open Oil file explorer" },
+		},
+		cmd = "Oil",
 		config = function()
 			function _G.get_oil_winbar()
 				local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
@@ -66,8 +70,6 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>", { desc = "Open Oil file explorer" })
-			vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 		end,
 	},
 }

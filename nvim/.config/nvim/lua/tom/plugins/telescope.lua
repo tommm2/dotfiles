@@ -85,14 +85,32 @@ return {
 		keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
 		keymap.set("n", "<leader>fj", "<cmd>Telescope jumplist<cr>", { desc = "Find jumplist" })
-		keymap.set("n", "<leader>fn", "<cmd>Telescope find_files cwd=~/Desktop/notes<cr>", { desc = "Find note" })
-		keymap.set(
-			"n",
-			"<leader>sn",
-			"<cmd>Telescope live_grep cwd=~/Desktop/notes<cr>",
-			{ desc = "Search note with text" }
-		)
-		keymap.set("n", "<leader>nn", ":e ~/notes/template.md<CR>", { desc = "New note" })
+		local note_home = vim.fn.expand("~/Desktop/note")
+		keymap.set("n", "<leader>nf", function()
+			require("telescope.builtin").find_files({ cwd = note_home, prompt_title = "Find Notes" })
+		end, { desc = "Find notes" })
+		keymap.set("n", "<leader>ng", function()
+			require("telescope.builtin").live_grep({ cwd = note_home, prompt_title = "Search Notes" })
+		end, { desc = "Search notes" })
+		keymap.set("n", "<leader>nn", function()
+			local choices = { "idea", "issue", "learning" }
+			vim.ui.select(choices, { prompt = "Select template:" }, function(choice)
+				if not choice then return end
+				local dest = note_home .. "/issues/untitled.md"
+				local template_file = note_home .. "/templates/" .. choice .. ".md"
+				local date = os.date("%Y-%m-%d")
+				local f = io.open(template_file, "r")
+				if not f then return end
+				local content = f:read("*a")
+				f:close()
+				content = content:gsub("date:", "date: " .. date)
+				local out = io.open(dest, "w")
+				if not out then return end
+				out:write(content)
+				out:close()
+				vim.cmd("edit " .. dest)
+			end)
+		end, { desc = "New note with template" })
 		keymap.set("n", "<leader>fh", function()
 			require("telescope.builtin").find_files({
 				find_command = { "fd", "--hidden", "--no-ignore", "--glob", ".env*" },

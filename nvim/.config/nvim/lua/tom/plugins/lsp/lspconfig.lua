@@ -1,9 +1,9 @@
 return {
 	"neovim/nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"saghen/blink.cmp",
-		{ "antosha417/nvim-lsp-file-operations", config = true },
-	},
+},
 	opts = {
 		servers = {
 			ts_ls = {
@@ -18,8 +18,7 @@ return {
 			ruff = {},
 			eslint = {},
 			marksman = {},
-			sqls = {},
-			yamlls = {},
+				yamlls = {},
 			jsonls = {},
 			lua_ls = {
 				settings = {
@@ -55,7 +54,7 @@ return {
 				},
 			},
 			underline = true,
-			update_in_insert = true,
+			update_in_insert = false,
 			severity_sort = true,
 			float = { border = "rounded" },
 		})

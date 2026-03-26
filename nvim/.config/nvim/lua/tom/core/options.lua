@@ -1,7 +1,9 @@
 local opt = vim.opt
 
 vim.o.swapfile = false
+vim.o.timeoutlen = 300
 vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.cmdheight = 1

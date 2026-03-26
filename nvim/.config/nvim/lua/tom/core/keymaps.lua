@@ -23,11 +23,6 @@ map("n", "<leader>sx", ":close<CR>", opt("Close current window"))
 map("n", "<C-d>", "<C-d>zz", opt("Page down"))
 map("n", "<C-u>", "<C-u>zz", opt("Page up"))
 
--- Terminal
-map("t", "<esc>", [[<C-\><C-n>]])
-map("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", opt("Toggle vertical terminal"))
-map("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", opt("Toggle horizontal terminal"))
-
 -- Buffer
 map("n", "<S-l>", ":bnext<CR>", opt("Next buffer"))
 map("n", "<S-h>", ":bprevious<CR>", opt("Previous buffer"))

@@ -50,8 +50,7 @@ return {
 				"python",
 				"sql",
 				"go",
-				"gdscript",
-			},
+				},
 			incremental_selection = {
 				enable = true,
 				keymaps = {

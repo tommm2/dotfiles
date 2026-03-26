@@ -32,7 +32,7 @@ return {
 				completion = {
 					list = {
 						selection = {
-							preselect = false,
+							preselect = true,
 							auto_insert = false,
 						},
 					},
@@ -41,7 +41,7 @@ return {
 						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 						draw = {
 							columns = {
-								{ "kind_icon", "label", gap = 1 },
+								{ "kind_icon", gap = 1 },
 								{ "kind" },
 							},
 						},
@@ -60,6 +60,13 @@ return {
 							name = "LazyDev",
 							module = "lazydev.integrations.blink",
 							score_offset = 100,
+						},
+						lsp = {
+							transform_items = function(_, items)
+								return vim.tbl_filter(function(item)
+									return item.kind ~= require("blink.cmp.types").CompletionItemKind.Snippet
+								end, items)
+							end,
 						},
 					},
 				},

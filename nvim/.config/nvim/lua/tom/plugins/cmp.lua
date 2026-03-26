@@ -41,7 +41,7 @@ return {
 						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 						draw = {
 							columns = {
-								{ "kind_icon", gap = 1 },
+								{ "kind_icon", "label", gap = 1 },
 								{ "kind" },
 							},
 						},

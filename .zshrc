@@ -100,5 +100,3 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 eval "$(pyenv init -)"
-
-export PATH="$HOME/bin:$PATH"

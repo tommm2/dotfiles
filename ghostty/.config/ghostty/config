@@ -10,7 +10,10 @@ window-width = 120
 window-height = 36
 
 # Background transparency and blur
-background-opacity = 0.90 
+background-image = ~/Desktop/images/dog.png
+background-image-opacity = 0.15 
+background-image-fit = cover
+# background-opacity = 0.50 
 background-blur-radius = 20
 
 # adjust padding when adjust window size

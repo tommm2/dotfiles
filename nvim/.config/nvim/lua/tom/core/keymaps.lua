@@ -9,6 +9,7 @@ end
 map("n", "<leader>+", "<C-a>", opt("Increment number"))
 map("n", "<leader>-", "<C-x>", opt("Decrement number"))
 map("n", "<leader>w", ":w<CR>", opt("Save file"))
+map("n", "<leader>q", ":q<CR>", opt("Close panel"))
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
@@ -36,9 +37,9 @@ map("v", "<A-j>", ":m '>+1<CR>gv=gv", opt("Move selection down"))
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", opt("Move selection up"))
 
 -- quickfix
-map("n", "<leader>ql", function()
-	vim.diagnostic.setqflist({ open = true })
-end, opt("Open quickfix list"))
+-- map("n", "<leader>ql", function()
+-- 	vim.diagnostic.setqflist({ open = true })
+-- end, opt("Open quickfix list"))
 
 -- Git
 map("n", "<leader>gs", ":Git<CR>", opt("Git Status"))

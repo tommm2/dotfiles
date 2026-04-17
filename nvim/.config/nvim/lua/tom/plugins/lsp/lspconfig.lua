@@ -1,24 +1,39 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	dependencies = {
 		"saghen/blink.cmp",
-},
+	},
 	opts = {
 		servers = {
-			ts_ls = {
+			vtsls = {
 				settings = {
-					javascript = { inlayHints = { includeInlayParameterNameHints = "all" } },
-					typescript = { inlayHints = { includeInlayParameterNameHints = "all" } },
+					typescript = {
+						inlayHints = {
+							parameterNames = { enabled = "all" },
+							parameterTypes = { enabled = false },
+							variableTypes = { enabled = false },
+							propertyDeclarationTypes = { enabled = false },
+							functionLikeReturnTypes = { enabled = false },
+							enumMemberValues = { enabled = true },
+						},
+					},
+				},
+				flags = {
+					debounce_text_changes = 150,
 				},
 			},
 			cssls = {},
 			tailwindcss = {},
 			gopls = {},
 			ruff = {},
-			eslint = {},
+			eslint = {
+				flags = {
+					debounce_text_changes = 200,
+				},
+			},
 			marksman = {},
-				yamlls = {},
+			yamlls = {},
 			jsonls = {},
 			lua_ls = {
 				settings = {
@@ -61,6 +76,12 @@ return {
 
 		vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#f38ba8" })
 		vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#f9e2af" })
+
+		-- Setup each server
+		for server_name, server_opts in pairs(opts.servers) do
+			vim.lsp.config(server_name, server_opts)
+			vim.lsp.enable(server_name)
+		end
 
 		-- LSP Attach Autocommand for keymaps and settings
 		vim.api.nvim_create_autocmd("LspAttach", {

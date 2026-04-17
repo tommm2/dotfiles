@@ -1,33 +1,86 @@
-# Theme
-theme = dark:Rose Pine,light:Rose Pine Moon
+# Rose Pine Theme - Frosted Glass Edition
+
+# Colors - Rose Pine palette
+background = 191724
+foreground = e0def4
+cursor-color = ebbcba
+cursor-text = 191724
+selection-background = 403d52
+selection-foreground = e0def4
+
+# ANSI colors - Rose Pine
+palette = 0=#26233a
+palette = 1=#eb6f92
+palette = 2=#9ccfd8
+palette = 3=#f6c177
+palette = 4=#31748f
+palette = 5=#c4a7e7
+palette = 6=#9ccfd8
+palette = 7=#e0def4
+palette = 8=#6e6a86
+palette = 9=#eb6f92
+palette = 10=#9ccfd8
+palette = 11=#f6c177
+palette = 12=#31748f
+palette = 13=#c4a7e7
+palette = 14=#ebbcba
+palette = 15=#e0def4
 
 # Font
 font-size = 16
-font-family = MesloLGL Nerd Font Mono
+font-family = MesloLGS Nerd Font Mono
+font-feature = calt
+font-feature = liga
 
-# Window size
+# Window
 window-width = 120
 window-height = 36
-
-# Background transparency and blur
-background-image = ~/Desktop/images/dog.png
-background-image-opacity = 0.15 
-background-image-fit = cover
-# background-opacity = 0.50 
-background-blur-radius = 20
-
-# adjust padding when adjust window size
+window-padding-x = 16
+window-padding-y = 12
 window-padding-balance = true
+window-decoration = true
+window-theme = dark
+
+# Tab styling - macOS native tabs
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = hidden
+window-colorspace = display-p3
+unfocused-split-opacity = 0.85
+
+# Tab bar appearance
+gtk-tabs-location = top
+gtk-wide-tabs = false
+resize-overlay = never
+
+# Frosted glass effect
+background-opacity = 0.78
+background-blur-radius = 45
+
+# Cursor
+cursor-style = bar
+cursor-style-blink = true
+cursor-opacity = 0.85
+
+# Shell integration
+shell-integration-features = no-cursor
+macos-option-as-alt = left
 
 # Link detection
 link-url = true
 
-# Cursor
-cursor-style = block
-cursor-style-blink = false
-shell-integration-features = no-cursor
-macos-option-as-alt = left
+# Quick terminal
+quick-terminal-position = top
+quick-terminal-animation-duration = 0.12
 
 # Keybindings
 keybind = super+r=reload_config
 keybind = shift+enter=text:\n
+keybind = super+shift+t=new_tab
+keybind = super+shift+n=new_window
+keybind = super+w=close_surface
+keybind = super+shift+enter=toggle_quick_terminal
+
+# Copy/paste
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = clipboard

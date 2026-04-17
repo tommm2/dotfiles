@@ -7,14 +7,12 @@ follow_symlinks = false
 add_newline = false
 
 format = """
-➜\
 $directory\
 ${custom.giturl}\
 $git_branch\
 ${custom.git_worktree}\
 $git_status\
 ${custom.git_tag}\
-$line_break\
 $character\
 """
 
@@ -22,14 +20,14 @@ $character\
 # $all
 # """
 
-palette = "catppuccin_mocha"
+palette = "rose_pine"
 
 # [fill]
 # symbol = "'"
 
 [directory]
-style = "sapphire"
-format = "[ $path ]($style)"
+style = "fg:sapphire"
+format = "[$path ]($style)"
 truncation_length = 4
 
 [directory.substitutions]
@@ -50,11 +48,11 @@ format = " $user "
 [line_break] 
 disabled = true
 
-[character] 
+[character]
 disabled = false
-success_symbol = "[ ](bold fg:green)"
-error_symbol = "[✘ ](bold fg:red)"
-vimcmd_symbol = "[: ](bold fg:yellow)"
+success_symbol = "[❯](fg:iris)"
+error_symbol = "[❯](bold fg:love)"
+vimcmd_symbol = "[❮](fg:gold)"
 
 [package]
 disabled = false
@@ -86,10 +84,10 @@ format = "$output"
 require_repo = true
 ignore_timeout = true
 
-[git_branch] 
-symbol = "[](base) "
-style = "fg:lavender bg:base"
-format =  "  [$symbol$branch]($style)[](base)"
+[git_branch]
+symbol = ""
+style = "fg:lavender"
+format = "[$symbol $branch ]($style)"
 
 # [git_status] 
 # MINIMAL git status 
@@ -410,3 +408,111 @@ sky = "#7E9CD8"
 sapphire = "#D27E99" # dir fg
 blue = "#7E9CD8"
 lavender = "#E6C384"   # git branch fg
+
+[palettes.frosted_glass]
+# --- background (transparent-friendly) ---
+crust = "#191724"
+mantle = "#1f1d2e"
+base = "#2a273f"
+
+surface0 = "#393552"
+surface1 = "#44405f"
+surface2 = "#524f67"
+overlay0 = "#6e6a86"
+overlay1 = "#7f7a96"
+overlay2 = "#908caa"
+
+# --- text ---
+text = "#e0def4"
+subtext0 = "#908caa"
+subtext1 = "#c4c0d9"
+
+# --- accents (soft, muted for glass effect) ---
+rosewater = "#ebbcba"
+flamingo = "#eb6f92"
+pink = "#f0a6ca"
+mauve = "#c4a7e7"
+red = "#eb6f92"
+maroon = "#eb6f92"
+peach = "#f6c177"
+yellow = "#f6c177"
+green = "#9ccfd8"
+teal = "#9ccfd8"
+sky = "#9ccfd8"
+sapphire = "#9ccfd8"
+blue = "#9ccfd8"
+lavender = "#c4a7e7"
+
+[palettes.cyberpunk_matrix]
+# --- background ---
+crust = "#050709"
+mantle = "#0a0e14"
+base = "#1a1f29"
+
+surface0 = "#1a1f29"
+surface1 = "#252a34"
+surface2 = "#303540"
+overlay0 = "#6272a4"
+overlay1 = "#7282b4"
+overlay2 = "#8292c4"
+
+# --- text ---
+text = "#c5c8c6"
+subtext0 = "#6272a4"
+subtext1 = "#a0a4a8"
+
+# --- accents (cyberpunk/matrix) ---
+rosewater = "#ff79c6"
+flamingo = "#ff5555"
+pink = "#ff79c6"
+mauve = "#bd93f9"
+red = "#ff5555"
+maroon = "#ff6e6e"
+peach = "#ffb86c"
+yellow = "#f1fa8c"
+green = "#39ff14"
+teal = "#00fff2"
+sky = "#00fff2"
+sapphire = "#00fff2"
+blue = "#8be9fd"
+lavender = "#00fff2"
+
+[palettes.rose_pine]
+# --- background ---
+crust = "#191724"
+mantle = "#1f1d2e"
+base = "#26233a"
+
+surface0 = "#1f1d2e"
+surface1 = "#26233a"
+surface2 = "#403d52"
+overlay0 = "#6e6a86"
+overlay1 = "#908caa"
+overlay2 = "#908caa"
+
+# --- text ---
+text = "#e0def4"
+subtext0 = "#908caa"
+subtext1 = "#e0def4"
+
+# --- accents (Rose Pine) ---
+rosewater = "#ebbcba"
+flamingo = "#ebbcba"
+pink = "#ebbcba"
+mauve = "#c4a7e7"
+red = "#eb6f92"
+love = "#eb6f92"
+maroon = "#eb6f92"
+peach = "#f6c177"
+yellow = "#f6c177"
+gold = "#f6c177"
+green = "#9ccfd8"
+teal = "#9ccfd8"
+foam = "#9ccfd8"
+sky = "#9ccfd8"
+sapphire = "#9ccfd8"
+pine = "#31748f"
+blue = "#31748f"
+lavender = "#c4a7e7"
+iris = "#c4a7e7"
+rose = "#ebbcba"

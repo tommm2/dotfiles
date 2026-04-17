@@ -11,7 +11,7 @@ return {
 	{
 		"saghen/blink.cmp",
 		version = "*",
-		event = { "InsertEnter" },
+		lazy = false,
 		opts = function()
 			return {
 				keymap = {

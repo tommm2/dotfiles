@@ -57,8 +57,8 @@ background-opacity = 0.78
 background-blur-radius = 45
 
 # Cursor
-cursor-style = bar
-cursor-style-blink = true
+cursor-style = block
+cursor-style-blink = false
 cursor-opacity = 0.85
 
 # Shell integration

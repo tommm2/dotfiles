@@ -51,25 +51,6 @@ map("n", "<leader>gh", ":0Gclog<CR>", opt("Git file History"))
 map("n", "<leader>gw", ":Telescope git_worktree git_worktrees<CR>", opt("Git Switch Worktree"))
 map("n", "<leader>gW", ":Telescope git_worktree create_git_worktree<CR>", opt("Git Create Worktree"))
 
--- Note
-local tools_dir = vim.fn.expand("$TOOLS_DIR")
-
-map("n", "<leader>nr", function()
-	local file = vim.fn.expand("%:p")
-	vim.cmd("w")
-
-	local new_path = vim.fn.system(tools_dir .. "/note-rename.sh " .. vim.fn.shellescape(file))
-	new_path = vim.fn.trim(new_path)
-
-	if new_path ~= "" and not new_path:find("Error") then
-		vim.cmd("e " .. new_path)
-		vim.cmd("bd #")
-		print("Renamed: " .. vim.fn.fnamemodify(new_path, ":t"))
-	else
-		print("Rename failed: " .. new_path)
-	end
-end, opt("AI generate filename"))
-
 -- Ctrl+hjkl moves between nvim windows; at the edge it hands off to herdr.
 for key, dir in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
 	map("n", "<C-" .. key .. ">", function()

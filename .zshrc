@@ -79,7 +79,6 @@ alias gwp='git worktree prune'
 # 進階用法：建立新分支並新增工作區 (用法: gwnb <路徑> <新分支名>)
 alias gwnb='git worktree add -b'
 
-# export NOTE_DIR="$HOME/Desktop/note"
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$HOME/.local/bin:$PATH"

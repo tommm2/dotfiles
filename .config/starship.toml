@@ -16,10 +16,6 @@ ${custom.git_tag}\
 $character\
 """
 
-# right_format = """
-# $all
-# """
-
 palette = "rose_pine"
 
 # [fill]

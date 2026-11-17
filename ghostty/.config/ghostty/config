@@ -1,12 +1,12 @@
 # Rose Pine Theme - Frosted Glass Edition
 
 # Colors - Rose Pine palette
-background = 191724
-foreground = e0def4
-cursor-color = ebbcba
-cursor-text = 191724
-selection-background = 403d52
-selection-foreground = e0def4
+background =#191724
+foreground =#e0def4
+cursor-color =#ebbcba
+cursor-text =#191724
+selection-background =#403d52
+selection-foreground =#e0def4
 
 # ANSI colors - Rose Pine
 palette = 0=#26233a
@@ -28,6 +28,7 @@ palette = 15=#e0def4
 
 # Font
 font-size = 16
+font-family = Paper Mono
 font-family = MesloLGS Nerd Font Mono
 font-feature = calt
 font-feature = liga
@@ -53,7 +54,7 @@ gtk-wide-tabs = false
 resize-overlay = never
 
 # Frosted glass effect
-background-opacity = 0.78
+background-opacity = 1
 background-blur-radius = 45
 
 # Cursor

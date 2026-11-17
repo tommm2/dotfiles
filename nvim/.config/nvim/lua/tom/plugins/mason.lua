@@ -22,6 +22,12 @@ return {
     })
 
     mason_lspconfig.setup({
+      -- Let lspconfig.lua be the single source of truth for enabling servers
+      -- (with blink.cmp capabilities). Without this, mason-lspconfig v2
+      -- auto-enables every installed server at startup with default config,
+      -- which then gets re-enabled/re-configured by lspconfig.lua on BufReadPost
+      -- and restarts the client (e.g. tsserver SIGTERM) -> intermittent no-LSP.
+      automatic_enable = false,
       -- list of servers for mason to install
       ensure_installed = {
         "vtsls",
@@ -34,6 +40,7 @@ return {
         "pyright",
         "gopls",
         "ruff",
+        "oxlint",
       },
     })
   end,

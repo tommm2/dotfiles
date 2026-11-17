@@ -27,3 +27,10 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+	pattern = "*",
+	callback = function()
+		io.write("\27[2 q")
+	end,
+})

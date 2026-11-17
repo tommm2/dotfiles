@@ -24,9 +24,14 @@ return {
 				},
 			},
 			cssls = {},
+			html = {},
+			svelte = {},
+			pyright = {},
+			prismals = {},
 			tailwindcss = {},
 			gopls = {},
 			ruff = {},
+			oxlint = {},
 			eslint = {
 				flags = {
 					debounce_text_changes = 200,
@@ -43,8 +48,7 @@ return {
 					},
 				},
 			},
-			dockerls = {},
-			docker_compose_language_service = {},
+			docker_language_server = {},
 		},
 	},
 	config = function(_, opts)

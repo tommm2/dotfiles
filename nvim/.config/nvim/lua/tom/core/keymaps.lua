@@ -69,3 +69,18 @@ map("n", "<leader>nr", function()
 		print("Rename failed: " .. new_path)
 	end
 end, opt("AI generate filename"))
+
+-- Ctrl+hjkl moves between nvim windows; at the edge it hands off to herdr.
+for key, dir in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
+	map("n", "<C-" .. key .. ">", function()
+		local from = vim.api.nvim_get_current_win()
+		vim.cmd.wincmd(key)
+		local pane = vim.env.HERDR_PANE_ID
+		if from == vim.api.nvim_get_current_win() and pane then
+			vim.fn.jobstart(
+				{ vim.env.HERDR_BIN_PATH or "herdr", "pane", "focus", "--pane", pane, "--direction", dir },
+				{ detach = true }
+			)
+		end
+	end, opt("Window/pane " .. dir))
+end

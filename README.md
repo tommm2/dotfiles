@@ -3,7 +3,6 @@
 ## Contents
 
 - **Neovim** — 編輯器設定
-- **Tmux** — Terminal 分割與 session 管理
 - **Zsh** — Shell 設定（zinit 管理插件）
 - **Starship** — Prompt 主題
 - **Ghostty** — Terminal 模擬器設定

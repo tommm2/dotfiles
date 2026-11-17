@@ -57,7 +57,6 @@ alias ll="eza -al --icons=always"
 alias ls="eza --icons=always"
 alias zshconf="vi ~/.zshrc"
 alias termconf="vi ~/dotfiles/ghostty/.config/ghostty/config"
-alias tmuxconf="vi ~/dotfiles/.tmux.conf"
 
 # Git alias
 alias gco="git checkout"
@@ -76,16 +75,6 @@ alias gwr='git worktree remove'
 alias gwp='git worktree prune'
 # 進階用法：建立新分支並新增工作區 (用法: gwnb <路徑> <新分支名>)
 alias gwnb='git worktree add -b'
-
-# Tmux alias
-alias tn='tmux new -s'
-alias tls='tmux ls'
-alias ta='tmux attach -t'
-alias tat='tmux attach || tmux new'
-alias ts='tmux switch -t'
-alias tk='tmux kill-session -t'
-alias tks='tmux kill-server'
-alias td='tmux detach'
 
 # export NOTE_DIR="$HOME/Desktop/note"
 export TOOLS_DIR="$HOME/Desktop/projects/tools"

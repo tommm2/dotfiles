@@ -1,0 +1,55 @@
+onboarding = false
+
+[theme]
+name = "rose-pine"
+auto_switch = false
+
+[ui]
+status_indicators = "dots"
+tab_bar_right = [
+  { type = "command", command = "~/dotfiles/scripts/claude-usage.sh", interval_seconds = 15, timeout_seconds = 3 },
+  { type = "command", command = "~/dotfiles/scripts/codex-usage.sh", interval_seconds = 30, timeout_seconds = 3 },
+]
+tab_bar_right_separator = " · "
+
+[keys]
+prefix = "ctrl+s"
+settings = "prefix+shift+s"
+split_horizontal = "prefix+s"
+split_vertical = "prefix+v"
+new_workspace = "prefix+n"
+next_tab = "prefix+shift+n"
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+navigate_pane_down = "ctrl+j"
+navigate_pane_up = "ctrl+k"
+
+# ctrl+hjkl is dispatched by a script: vim/nvim panes get the key, everything
+# else moves herdr's pane focus.
+[[keys.command]]
+key = "ctrl+h"
+type = "shell"
+command = "~/dotfiles/scripts/herdr-nav.sh left ctrl+h"
+description = "pane/window left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "shell"
+command = "~/dotfiles/scripts/herdr-nav.sh down ctrl+j"
+description = "pane/window down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "shell"
+command = "~/dotfiles/scripts/herdr-nav.sh up ctrl+k"
+description = "pane/window up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "shell"
+command = "~/dotfiles/scripts/herdr-nav.sh right ctrl+l"
+description = "pane/window right"

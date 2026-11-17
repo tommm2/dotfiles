@@ -7,6 +7,7 @@
 - **Zsh** — Shell 設定（zinit 管理插件）
 - **Starship** — Prompt 主題
 - **Ghostty** — Terminal 模擬器設定
+- **Herdr** — Terminal 多工器設定（`herdr/.config/herdr/config.toml`，搭配 `scripts/herdr-nav.sh` 與 tab bar 用量腳本）
 
 ## 前置安裝
 

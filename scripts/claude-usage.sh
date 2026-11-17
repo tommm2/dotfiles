@@ -1,20 +1,8 @@
 #!/bin/bash
 # Display Claude Code usage for a status bar.
-# Default output carries tmux #[fg=...] markup; --plain drops it (herdr tab bar).
 # Only shows for subscription plans (with rate limits), not API billing.
 
 CLAUDE_CACHE="$HOME/.cache/ai-usage/claude.json"
-
-# Rose Pine colors
-COLOR_CLAUDE="#c4a7e7"
-COLOR_PERCENT="#f6c177"
-
-c_label="#[fg=$COLOR_CLAUDE]"
-c_pct="#[fg=$COLOR_PERCENT]"
-if [[ "$1" == "--plain" ]]; then
-    c_label=""
-    c_pct=""
-fi
 
 # Horizontal partial blocks, no full block among them: a part-filled cell must
 # never render as a full one. Indexed, not a substring: ${str:n:1} slices bytes
@@ -54,7 +42,7 @@ if [[ -f "$CLAUDE_CACHE" ]]; then
             [[ "$pct" == "-1" || "$pct" == "null" || -z "$pct" ]] && pct=0
             local remaining=$((100 - ${pct%.*}))
             (( remaining < 0 )) && remaining=0
-            echo "${c_label}${label}$(draw_bar $remaining) ${c_pct}${remaining}%"
+            echo "${label}$(draw_bar $remaining) ${remaining}%"
         }
 
         if [[ "$rate_7d" != "-1" ]]; then

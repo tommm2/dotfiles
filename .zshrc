@@ -1,9 +1,12 @@
 # OPENSPEC:START
 # OpenSpec shell completions configuration
-fpath=("/Users/jinzhengrong/.zsh/completions" $fpath)
+fpath=("$HOME/.zsh/completions" $fpath)
 autoload -Uz compinit
 compinit
 # OPENSPEC:END
+
+# WSL reports "microsoft" in the kernel release; macOS has no /proc.
+[[ -r /proc/sys/kernel/osrelease && "$(</proc/sys/kernel/osrelease)" == *[Mm]icrosoft* ]] && IS_WSL=1
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -77,15 +80,24 @@ alias gwp='git worktree prune'
 alias gwnb='git worktree add -b'
 
 # export NOTE_DIR="$HOME/Desktop/note"
-export TOOLS_DIR="$HOME/Desktop/projects/tools"
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$HOME/.local/bin:$PATH"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# Shell integrations
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-eval "$(fzf --zsh)"
-eval "$(pyenv init -)"
+# WSL: macOS clipboard/open commands mapped to their Windows counterparts.
+if [[ -n "$IS_WSL" ]]; then
+  alias pbcopy='clip.exe'
+  alias pbpaste='powershell.exe -NoProfile -Command Get-Clipboard | tr -d "\r"'
+  alias open='explorer.exe'
+fi
+
+# Shell integrations (skipped when the tool is not installed on this machine)
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+(( $+commands[fzf] )) && eval "$(fzf --zsh)"
+(( $+commands[pyenv] )) && eval "$(pyenv init -)"
+
+# Machine-specific settings (paths, secrets) live outside the repo.
+[[ -r ~/.zshrc.local ]] && source ~/.zshrc.local

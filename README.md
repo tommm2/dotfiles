@@ -23,7 +23,7 @@ claude  # Claude Code CLI，note-rename 會用到
 
 ## 環境變數
 
-在 `~/.zshrc` 設定以下路徑（依個人環境調整）：
+各台機器自己的路徑寫在 `~/.zshrc.local`（不進版控，由 `.zshrc` 最後載入）：
 
 ```bash
 export NOTE_DIR="$HOME/Desktop/note"

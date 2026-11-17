@@ -24,12 +24,15 @@ The repo is expected at `~/dotfiles`. Paths in the Herdr config point at `~/dotf
 | `nvim/.config/nvim/` | `~/.config/nvim` | `stow nvim` | Neovim; plugins managed by lazy.nvim |
 | `ghostty/.config/ghostty/` | `~/.config/ghostty` | `stow ghostty` | Ghostty terminal |
 | `herdr/.config/herdr/config.toml` | `~/.config/herdr/config.toml` | `stow herdr` | Herdr terminal multiplexer |
+| `claude/.claude/skills/<name>/` | `~/.claude/skills/<name>` | `stow claude` | Personal Claude Code skills |
 | `scripts/` | Not linked; called as `~/dotfiles/scripts/...` | — | Scripts used by Herdr |
 | `Brewfile` | Not linked | `brew bundle` | Homebrew package list |
 
-`nvim`, `ghostty` and `herdr` are GNU Stow packages: the tree inside each one mirrors its location under `$HOME`. The repo root is not a stow package. Do not run `stow .`, or `README.md` and `Brewfile` will be linked into `$HOME` as well.
+`nvim`, `ghostty`, `herdr` and `claude` are GNU Stow packages: the tree inside each one mirrors its location under `$HOME`. The repo root is not a stow package. Do not run `stow .`, or `README.md` and `Brewfile` will be linked into `$HOME` as well.
 
 `~/.config/herdr/` also holds runtime files (sockets, logs, `session.json`), so only `config.toml` is linked. When that directory already exists, stow links just the file.
+
+Likewise, `~/.claude/skills/` also contains skills synced from claude.ai (`synced/`), which are managed by Claude and not tracked here. Each personal skill directory is linked on its own. If `~/.claude/skills/` does not exist yet, create it before running stow so stow does not link the whole directory.
 
 ## Installation
 
@@ -80,16 +83,16 @@ The apt versions of `neovim`, `starship`, `eza`, `fzf`, `zoxide` and `pyenv` are
 
 ```bash
 cd ~/dotfiles
-mkdir -p ~/.config
+mkdir -p ~/.config ~/.claude/skills
 
 # If a target already exists, back it up first (see rule 2)
 ln -s ~/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/.config/starship.toml ~/.config/starship.toml
 
-stow -t ~ nvim ghostty herdr
+stow -t ~ nvim ghostty herdr claude
 ```
 
-On WSL without Ghostty, run `stow -t ~ nvim herdr` instead.
+On WSL without Ghostty, run `stow -t ~ nvim herdr claude` instead.
 
 ### 5. Machine-specific settings (optional)
 
@@ -128,6 +131,7 @@ herdr server reload-config
 
 ```bash
 ls -l ~/.zshrc ~/.config/starship.toml ~/.config/nvim ~/.config/ghostty ~/.config/herdr/config.toml
+ls -l ~/.claude/skills
 zsh -n ~/.zshrc && echo "zshrc syntax ok"
 zsh -ic 'whence -w z prompt_starship_precmd fzf-history-widget'
 nvim --headless "+lua print(vim.fn.maparg('<C-l>','n',false,true).desc)" +qa
@@ -136,7 +140,7 @@ herdr config check
 
 Expected results:
 
-- All five paths are symlinks into `~/dotfiles/...`.
+- All five paths are symlinks into `~/dotfiles/...`, and each skill under `claude/.claude/skills/` appears in `~/.claude/skills` as a symlink into `~/dotfiles/claude/...`.
 - `whence` reports `function` for all three names.
 - Neovim prints `Window/pane right`.
 - `herdr config check` prints `config: ok`.
@@ -169,6 +173,11 @@ Expected results:
 ### Ghostty (`ghostty/`)
 
 - Font: `Paper Mono`, falling back to `MesloLGS Nerd Font Mono`. Meslo is in the `Brewfile`; Paper Mono is not and must be installed separately. Without it, Ghostty uses Meslo.
+
+### Claude Code skills (`claude/`)
+
+- Personal skills: `ask-me`, `bro`, `grill-me`, `how`, `no-comments`, `resume-review` and `write-resume`. Each directory holds a `SKILL.md` and its supporting files.
+- Other skills in `~/.claude/skills/` (plugin skills, claude.ai sync, and skills kept local on purpose) are not in this repo.
 
 ### Starship (`.config/starship.toml`)
 

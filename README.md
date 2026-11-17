@@ -25,6 +25,7 @@ The repo is expected at `~/dotfiles`. Paths in the Herdr config point at `~/dotf
 | `ghostty/.config/ghostty/` | `~/.config/ghostty` | `stow ghostty` | Ghostty terminal |
 | `herdr/.config/herdr/config.toml` | `~/.config/herdr/config.toml` | `stow herdr` | Herdr terminal multiplexer |
 | `claude/.claude/skills/<name>/` | `~/.claude/skills/<name>` | `stow claude` | Personal Claude Code skills |
+| `claude/.config/caveman/config.json` | `~/.config/caveman/config.json` | `stow claude` | Default mode for the caveman plugin |
 | `scripts/` | Not linked; called as `~/dotfiles/scripts/...` | — | Scripts used by Herdr |
 | `Brewfile` | Not linked | `brew bundle` | Homebrew package list |
 
@@ -114,7 +115,18 @@ chsh -s "$(command -v zsh)"
 
 This step asks the user for a password.
 
-### 7. Initialise
+### 7. Claude Code plugins
+
+Run these inside Claude Code. They need the user's Claude Code session, so an AI agent should list them for the user instead of running them.
+
+```text
+/plugin marketplace add JuliusBrussee/caveman
+/plugin install caveman@caveman
+/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail
+```
+
+### 8. Initialise
 
 ```bash
 # Start zsh once so zinit downloads its plugins
@@ -174,10 +186,16 @@ Expected results:
 
 - Font: `Paper Mono`, falling back to `MesloLGS Nerd Font Mono`. Meslo is in the `Brewfile`; Paper Mono is not and must be installed separately. Without it, Ghostty uses Meslo.
 
-### Claude Code skills (`claude/`)
+### Claude Code (`claude/`)
 
 - Personal skills: `ask-me`, `bro`, `grill-me`, `how`, `no-comments`, `resume-review` and `write-resume`. Each directory holds a `SKILL.md` and its supporting files.
 - Other skills in `~/.claude/skills/` (plugin skills, claude.ai sync, and skills kept local on purpose) are not in this repo.
+
+### Claude Code plugins: caveman and ponytail
+
+- caveman shortens Claude's conversational replies. `~/.config/caveman/config.json` sets the default mode (`full`). Switch per session with `/caveman lite|full|ultra|off`.
+- ponytail makes Claude prefer the smallest working change. It has no config file; the default level is `full`. Switch per session with `/ponytail lite|full|ultra`, or turn it off with "stop ponytail".
+- Both plugins are installed from their GitHub marketplaces (step 7). Their runtime state (`~/.claude/.caveman-active`, `~/.claude/.ponytail-active`, session logs) is not tracked.
 
 ### Starship (`.config/starship.toml`)
 

@@ -25,6 +25,7 @@ The repo is expected at `~/dotfiles`. Paths in the Herdr config point at `~/dotf
 | `ghostty/.config/ghostty/` | `~/.config/ghostty` | `stow ghostty` | Ghostty terminal |
 | `herdr/.config/herdr/config.toml` | `~/.config/herdr/config.toml` | `stow herdr` | Herdr terminal multiplexer |
 | `claude/.claude/skills/<name>/` | `~/.claude/skills/<name>` | `stow claude` | Personal Claude Code skills |
+| `claude/.claude/statusline.sh` | `~/.claude/statusline.sh` | `stow claude` | Claude Code status line |
 | `claude/.config/caveman/config.json` | `~/.config/caveman/config.json` | `stow claude` | Default mode for the caveman plugin |
 | `codex/.codex/AGENTS.md` | `~/.codex/AGENTS.md` | `stow codex` | Global Codex instructions |
 | `codex/.codex/skills/<name>` | `~/.codex/skills/<name>` | `stow codex` | Symlinks to the same skills as `claude/` |
@@ -182,7 +183,7 @@ Expected results:
 - Prefix is `Ctrl+s`. `prefix+s` / `prefix+v` split panes; `prefix+n` creates a workspace.
 - `Ctrl+h/j/k/l` is handled by `scripts/herdr-nav.sh`. When the focused pane runs vim or nvim, the key is sent to the editor; otherwise Herdr's pane focus moves.
 - The right side of the tab bar shows AI usage:
-  - `scripts/claude-usage.sh` reads `~/.cache/ai-usage/claude.json`. That cache is written by the Claude Code status line script `~/.claude/statusline.sh`, which is not in this repo. Without it, the segment is empty.
+  - `scripts/claude-usage.sh` reads `~/.cache/ai-usage/claude.json`. That cache is written by the Claude Code status line script `claude/.claude/statusline.sh`. Without a running Claude Code session, the cache goes stale after 10 minutes and the segment is empty.
   - `scripts/codex-usage.sh` reads the Codex session logs. Without Codex, the segment is empty.
 - Theme: rose-pine.
 
@@ -193,6 +194,7 @@ Expected results:
 ### Claude Code (`claude/`)
 
 - Personal skills: `ask-me`, `bro`, `grill-me`, `how`, `no-comments`, `resume-review` and `write-resume`. Each directory holds a `SKILL.md` and its supporting files.
+- `statusline.sh` shows the caveman and ponytail badges and the remaining 5h / 7d rate limit, and writes usage to `~/.cache/ai-usage/claude.json` for the herdr tab bar. `~/.claude/settings.json` is not tracked, so set `"statusLine": {"type": "command", "command": "~/.claude/statusline.sh"}` there by hand on a new machine.
 - Other skills in `~/.claude/skills/` (plugin skills, claude.ai sync, and skills kept local on purpose) are not in this repo.
 
 ### Claude Code plugins: caveman and ponytail

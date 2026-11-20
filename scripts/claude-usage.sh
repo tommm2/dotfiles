@@ -35,18 +35,24 @@ if [[ -f "$CLAUDE_CACHE" ]]; then
 
     # Cache must be fresh (< 10 min) and have rate limits
     if (( age < 600 )); then
-        rate_7d=$(jq -r '.rate_7d_pct // -1' "$CLAUDE_CACHE" 2>/dev/null)
+        read -r rate_5h rate_7d < <(jq -r '[.rate_5h_pct, .rate_7d_pct] | map(if type == "number" and . >= 0 then floor else -1 end) | join(" ")' "$CLAUDE_CACHE" 2>/dev/null)
 
         segment() {
             local label=$1 pct=$2
-            [[ "$pct" == "-1" || "$pct" == "null" || -z "$pct" ]] && pct=0
-            local remaining=$((100 - ${pct%.*}))
+            local remaining=$((100 - pct))
             (( remaining < 0 )) && remaining=0
             echo "${label}$(draw_bar $remaining) ${remaining}%"
         }
 
-        if [[ "$rate_7d" != "-1" ]]; then
-            segment "Claude Code 7d" "$rate_7d"
+        usage=""
+        if [[ -n "$rate_5h" && "$rate_5h" != "-1" ]]; then
+            usage=$(segment "5h" "$rate_5h")
+        fi
+        if [[ -n "$rate_7d" && "$rate_7d" != "-1" ]]; then
+            usage="${usage:+$usage · }$(segment "7d" "$rate_7d")"
+        fi
+        if [[ -n "$usage" ]]; then
+            printf 'Claude Code %s\n' "$usage"
             exit 0
         fi
     fi

@@ -9,7 +9,7 @@ Write the user's understanding from this conversation into a Markdown note, then
 
 ## Where the note goes
 
-Root: `$NOTE_DIR`, or `~/Desktop/projects/note` when it is unset. It is a git repo (`https://github.com/tommm2/note.git`, private). Each machine sets `NOTE_DIR` in its own `~/.claude/settings.json` under `env`; never hardcode `/Users/<name>`.
+Root: `$NOTE_DIR`, or `~/Desktop/projects/note` when it is unset. The root is usually a git repo whose clone URL is `$NOTE_REPO`. Each machine sets both in its own `~/.claude/settings.json` under `env`; never hardcode `/Users/<name>` or a repo URL.
 
 Folder, from the argument or from the request in plain words ("放 auth 資料夾"):
 
@@ -17,7 +17,7 @@ Folder, from the argument or from the request in plain words ("放 auth 資料�
 - a relative path such as `auth` or `infra/aws`: `<root>/<path>/`, created if missing
 - starting with `/` or `~`: that absolute path, used as is
 
-If the root does not exist, ask whether to clone the repo there. On yes, run `git clone https://github.com/tommm2/note.git "$root"`. If the clone fails (for example `gh` is not logged in on this machine), stop and show the error. Never fall back to writing somewhere else.
+If the root does not exist, ask whether to clone the note repo there. Use `$NOTE_REPO` as the URL; when it is unset, ask the user for the URL. On yes, run `git clone "$url" "$root"`. If the clone fails (for example `gh` is not logged in on this machine), stop and show the error. Never fall back to writing somewhere else.
 
 ## What goes in
 

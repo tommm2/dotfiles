@@ -195,6 +195,7 @@ Expected results:
 
 - Personal skills: `ask-me`, `bro`, `encode-lessons-in-structure`, `grill-me`, `how`, `no-comments`, `note`, `resume-review`, `verify-in-browser` and `write-resume`. Each directory holds a `SKILL.md` and its supporting files.
 - `statusline.sh` shows the caveman and ponytail badges and the remaining 5h / 7d rate limit, and writes usage to `~/.cache/ai-usage/claude.json` for the herdr tab bar. `~/.claude/settings.json` is not tracked, so set `"statusLine": {"type": "command", "command": "~/.claude/statusline.sh"}` there by hand on a new machine.
+- `note` writes notes to `$NOTE_DIR` (default `~/Desktop/projects/note`) and clones `$NOTE_REPO` there when the folder is missing. Set both under `env` in `~/.claude/settings.json`, for example `"env": {"NOTE_DIR": "/Users/<you>/notes", "NOTE_REPO": "git@github.com:<you>/notes.git"}`. Without `NOTE_REPO`, the skill asks for the URL.
 - Other skills in `~/.claude/skills/` (plugin skills, claude.ai sync, and skills kept local on purpose) are not in this repo.
 
 ### Claude Code plugins: caveman and ponytail

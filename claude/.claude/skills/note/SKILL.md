@@ -29,7 +29,7 @@ Keep only these three kinds of point:
 2. **How concepts relate, and how to decide between them.** For example: "Entra ID 不是雲端版 AD，協定不同", "客戶只有 AD 就走 LDAP，有同步到 Entra 就走 OIDC".
 3. **Conclusions for the user's own situation.** Decisions, trade-offs, open items.
 
-A definition gets one line at most, with a source link next to it. Leave out options the conversation rejected, one-off grep output, and anything the user said to set aside.
+A definition gets one line at most, with a source link next to it. Leave out options the conversation rejected, one-off grep output, and anything the user said to set aside. Keep to the note's topic: a side question about a tool used along the way stays out, even when it was a point of confusion.
 
 Example entry:
 
